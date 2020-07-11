@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1094541347996",
+    "firebase_url": "https://xno-chat.firebaseio.com",
+    "project_id": "xno-chat",
+    "storage_bucket": "xno-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094541347996:android:a48625b7245856bc20f159",
+        "android_client_info": {
+          "package_name": "com.dynamicdudes.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094541347996-l9bhkrjn4kf5kp1famfj794562u76gom.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmRED7mnyfr-ND_XgAvGtK-cigMvJwajU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094541347996-l9bhkrjn4kf5kp1famfj794562u76gom.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
