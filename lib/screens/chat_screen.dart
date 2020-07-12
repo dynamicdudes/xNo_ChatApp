@@ -52,7 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
               }),
         ],
         title: Text('xNo Chat'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Color(0xFF850D27),
       ),
       body: SafeArea(
         child: Column(
@@ -103,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: Icon(
                           Icons.send,
                           size: 30.0,
-                          color: Colors.redAccent,
+                          color: Colors.red[600],
                         ),
                       ),
                     ),
@@ -207,7 +207,7 @@ class MessageBubble extends StatelessWidget {
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0),
                   ),
-            color: isMe ? Colors.redAccent : Colors.cyan[100],
+            color: isMe ? Color(0xFF850D27) : Colors.lightBlue[800],
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
