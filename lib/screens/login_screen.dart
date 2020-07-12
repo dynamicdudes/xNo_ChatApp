@@ -48,10 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.center,
                   onChanged: (value) {
                     email = '$value@mail.com';
-                    print("This is mail $email");
                   },
                   decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your email')),
+                      hintText: 'Enter your username')),
               SizedBox(
                 height: 8.0,
               ),

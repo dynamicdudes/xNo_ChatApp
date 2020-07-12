@@ -6,12 +6,14 @@ const kMessageTextFieldDecoration = InputDecoration(
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(30.0)),
         borderSide: BorderSide(
-          color: Color(0xFF850D27),
+          color: Color(0xFF7B6D92),
         )),
     border: InputBorder.none,
+    fillColor: Color(0xFF2D2837),
+    filled: true,
     focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(30.0)),
-        borderSide: BorderSide(color: Color(0xFF850D27))));
+        borderSide: BorderSide(color: Color(0xFF7B6D92))));
 
 const kMessageContainerDecoration = BoxDecoration(
   border: Border(

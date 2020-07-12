@@ -103,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: Icon(
                           Icons.send,
                           size: 30.0,
-                          color: Colors.red[600],
+                          color: Color(0xFFF33F5D),
                         ),
                       ),
                     ),
@@ -143,8 +143,6 @@ class MessagesStream extends StatelessWidget {
           final date = message.data['date'];
           final time = message.data['time'];
           final currentUser = loggedInUser.email;
-          //TODO: Add the Date feature when user clicked the messagebubble...
-          // final embededDate = '${messageSender} ${date}';
 
           final messageBubble = MessageBubble(
             sender: username,
