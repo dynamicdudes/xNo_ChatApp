@@ -22,10 +22,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.initState();
 
     controller = AnimationController(
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 2),
       vsync: this,
     );
-    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
+    animation = ColorTween(begin: Colors.blueGrey[800], end: Colors.black)
         .animate(controller);
     controller.forward();
     controller.addListener(() {
@@ -49,21 +49,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Flexible(
+              child: Hero(
+                tag: "logo",
+                child: Container(
+                  child: Image.asset('images/speak.png'),
+                  height: 150.0,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Flexible(
-                  child: Hero(
-                    tag: "logo",
-                    child: Container(
-                      //TODO:Add Logo of the chat app...
-                      child: Image.asset('images/speak.png'),
-                      height: 60.0,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 20.0,
-                ),
                 TypewriterAnimatedTextKit(
                   speed: Duration(seconds: 1),
                   text: ["xNo Chat"],
@@ -73,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               ],
             ),
             SizedBox(
-              height: 48.0,
+              height: 18.0,
             ),
             RoundedButton(
               colour: Colors.redAccent,

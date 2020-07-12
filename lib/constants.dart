@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
-const kSendButtonTextStyle = TextStyle(
-    color: Colors.redAccent, fontWeight: FontWeight.bold, fontSize: 18.0);
-
 const kMessageTextFieldDecoration = InputDecoration(
     contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
     hintText: "Type your message here...",
-    border: InputBorder.none);
+    enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        borderSide: BorderSide(color: Colors.redAccent, width: 2)),
+    border: InputBorder.none,
+    focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        borderSide: BorderSide(color: Colors.redAccent)));
 
 const kMessageContainerDecoration = BoxDecoration(
   border: Border(
-    top: BorderSide(color: Colors.redAccent, width: 2.0),
+    top: BorderSide(color: Colors.redAccent, width: 1.0),
   ),
 );
 

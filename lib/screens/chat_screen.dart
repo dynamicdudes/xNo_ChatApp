@@ -3,6 +3,7 @@ import 'package:chat_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:chat_app/extensions/string_extenstion.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -38,11 +39,13 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        leading: null,
+        leading: Container(),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.close),
+              icon: Icon(Icons.power_settings_new),
               onPressed: () {
                 _auth.signOut();
                 Navigator.pop(context);
@@ -58,45 +61,54 @@ class _ChatScreenState extends State<ChatScreen> {
           children: <Widget>[
             MessagesStream(),
             Container(
-              decoration: kMessageContainerDecoration,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      textCapitalization: TextCapitalization.sentences,
-                      keyboardType: TextInputType.text,
-                      controller: messageTextController,
-                      onChanged: (value) {
-                        messageText = value;
-                      },
-                      decoration: kMessageTextFieldDecoration,
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      messageTextController.clear();
-                      var now = DateTime.now();
-                      String date =
-                          '${now.day.toString()}/${now.month.toString()}';
-                      print("This is date:$date");
-                      String time = '${DateFormat.jm().format(now).toString()}';
-                      _firestore.collection('messages').add(
-                        {
-                          'text': messageText,
-                          'sender': loggedInUser.email,
-                          'date': date,
-                          'time': time,
-                          'Timestamp': FieldValue.serverTimestamp()
+              // decoration: kMessageContainerDecoration,
+              child: Padding(
+                padding: EdgeInsets.all(6.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 18,
+                      child: TextField(
+                        textCapitalization: TextCapitalization.sentences,
+                        keyboardType: TextInputType.text,
+                        controller: messageTextController,
+                        onChanged: (value) {
+                          messageText = value;
                         },
-                      );
-                    },
-                    child: Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
+                        decoration: kMessageTextFieldDecoration,
+                      ),
                     ),
-                  ),
-                ],
+                    Expanded(
+                      flex: 3,
+                      child: FlatButton(
+                        padding: EdgeInsets.all(0),
+                        onPressed: () {
+                          messageTextController.clear();
+                          var now = DateTime.now();
+                          String date =
+                              '${now.day.toString()}/${now.month.toString()}';
+                          String time =
+                              '${DateFormat.jm().format(now).toString()}';
+                          _firestore.collection('messages').add(
+                            {
+                              'text': messageText,
+                              'sender': loggedInUser.email,
+                              'date': date,
+                              'time': time,
+                              'Timestamp': FieldValue.serverTimestamp()
+                            },
+                          );
+                        },
+                        child: Icon(
+                          Icons.send,
+                          size: 30.0,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -127,6 +139,7 @@ class MessagesStream extends StatelessWidget {
           //data - Firebase data method...
           final messageText = message.data['text'];
           final messageSender = message.data['sender'];
+          final username = messageSender.split("@")[0];
           final date = message.data['date'];
           final time = message.data['time'];
           final currentUser = loggedInUser.email;
@@ -134,7 +147,7 @@ class MessagesStream extends StatelessWidget {
           // final embededDate = '${messageSender} ${date}';
 
           final messageBubble = MessageBubble(
-            sender: messageSender,
+            sender: username,
             text: messageText,
             isMe: currentUser == messageSender,
             date: date,
@@ -177,8 +190,8 @@ class MessageBubble extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            isMe ? "You" : sender,
-            style: TextStyle(fontSize: 12.0, color: Colors.black54),
+            isMe ? "You ${time}" : '${sender.captialFirstLetter()} ${time}',
+            style: TextStyle(fontSize: 12.0),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 2.0),
@@ -194,30 +207,15 @@ class MessageBubble extends StatelessWidget {
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0),
                   ),
-            elevation: 5.0,
-            color: isMe ? Colors.redAccent : Colors.white,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                        fontSize: 16.0,
-                        color: isMe ? Colors.white : Colors.black54),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: 12.0, bottom: 2.0),
-                  child: Text(
-                    time,
-                    style: TextStyle(fontSize: 10.0, color: Colors.black54),
-                  ),
-                ),
-              ],
+            color: isMe ? Colors.redAccent : Colors.cyan[100],
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              child: Text(
+                text,
+                style: TextStyle(
+                    fontSize: 16.0, color: isMe ? Colors.white : Colors.black),
+              ),
             ),
           ),
         ],
